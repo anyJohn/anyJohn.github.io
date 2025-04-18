@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ES6的学习（二） | AnyJohn</title><meta name="author" content="AnyJohn"><meta name="copyright" content="AnyJohn"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ES6的学习（二）解构赋值 ES6中允许从数组中提取值，对变量赋值，对象也可以实现解构。 数组解构 数组解构允许我们按照一一对应的关系从数组中提取值，然后将值赋值给变量  123456let ary = [1,2,3];let [a,b,c] =..."><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ES6的学习（二）",
+  "url": "http://anyjohn.github.io/2020/08/17/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/",
+  "image": "http://anyjohn.github.io/img/cover_default1.jpg",
+  "datePublished": "2020-08-17T08:10:00.000Z",
+  "dateModified": "2025-04-16T04:21:14.122Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "AnyJohn",
+      "url": "http://anyjohn.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/j.ico"><link rel="canonical" href="http://anyjohn.github.io/2020/08/17/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c743ebd81b6c6d31d307f41560bb78e8";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ES6的学习（二）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/cover_default1.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">AnyJohn</span></a><a class="nav-page-title" href="/"><span class="site-name">ES6的学习（二）</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">ES6的学习（二）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-17T08:10:00.000Z" title="发表于 2020-08-17 16:10:00">2020-08-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-16T04:21:14.122Z" title="更新于 2025-04-16 12:21:14">2025-04-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF/">前端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2020/08/17/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2020/08/17/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="ES6的学习（二）"><a href="#ES6的学习（二）" class="headerlink" title="ES6的学习（二）"></a>ES6的学习（二）</h2><h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><p> ES6中允许从数组中提取值，对变量赋值，对象也可以实现解构。</p>
+<h4 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h4><p> 数组解构允许我们按照一一对应的关系从数组中提取值，然后将值赋值给变量</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let ary = [1,2,3];</span><br><span class="line">let [a,b,c] = ary;</span><br><span class="line">console.log(a);</span><br><span class="line">console.log(b);</span><br><span class="line">console.log(c);</span><br><span class="line">// 输出1 2 3</span><br></pre></td></tr></table></figure>
+<p> 如果解构不成功，变量的值为undeined</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let [foo] = [];</span><br><span class="line">let [bar,foo] = [1];</span><br><span class="line">console.log(bar);// 1</span><br><span class="line">console.log(foo);// undefined</span><br></pre></td></tr></table></figure>
+
+<h4 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h4><p>对象解构允许我们使用变量的名字匹配对象的属性，匹配成功将对象属性的值赋值给变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let person = &#123; name: &#x27;john&#x27; , age: 20&#125;;</span><br><span class="line">let &#123; name, age &#125; = person;</span><br><span class="line">console.log(name); // &#x27;john&#x27;</span><br><span class="line">console.log(age); //20</span><br><span class="line">//</span><br><span class="line">let &#123;name: myName , age: myAge&#125; = person;</span><br><span class="line">console.log(myname); // &#x27;john&#x27;</span><br><span class="line">console.log(myAge);// 20</span><br></pre></td></tr></table></figure>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p> ES6中新增的定义函数的方式，用来简化函数定义语法的</p>
+<h4 id="箭头函数的几种写法"><a href="#箭头函数的几种写法" class="headerlink" title="箭头函数的几种写法"></a>箭头函数的几种写法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const fn = () =&gt; &#123;</span><br><span class="line">    console.log(123)</span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br><span class="line"></span><br><span class="line">// 如果函数体只有一句代码，且代码执行结果就是返回值，可以省略大括号</span><br><span class="line">const sum = (num1,num2) =&gt; &#123; //一般写法</span><br><span class="line">    return num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line">const sumLite = (num1,num2) =&gt; num1 + num2 ; //简化写法</span><br><span class="line">let result = sumLite(10,20);</span><br><span class="line">console.log(result);</span><br><span class="line"></span><br><span class="line">// 如果形参只有一个，可以省略小括号</span><br><span class="line">function fn (v) &#123; //一般写法</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br><span class="line">const fnLite = v =&gt; v;// 简化写法</span><br></pre></td></tr></table></figure>
+
+<h4 id="箭头函数中的this"><a href="#箭头函数中的this" class="headerlink" title="箭头函数中的this"></a>箭头函数中的this</h4><p>箭头函数不绑定this关键字，箭头函数中的tis，指向的是<strong>函数定义位置的上下文this</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;name: &#x27;张三&#x27;&#125;</span><br><span class="line">function fn () &#123;</span><br><span class="line">    console.log(this);</span><br><span class="line">    return () =&gt; &#123;</span><br><span class="line">        console.log(this)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const resFn = fn.call(obj);</span><br><span class="line">resFn();</span><br><span class="line"></span><br><span class="line">// 箭头函数没有自己的this关键字，this关键字将指向箭头函数定义位置中的this</span><br><span class="line">function fnTest () &#123;</span><br><span class="line">    console.log(this);</span><br><span class="line">    return () =&gt; &#123;</span><br><span class="line">        console.log(this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">console obj = &#123;name: &#x27;john&#x27;&#125;;</span><br><span class="line">const resFn =  fnTest.call(obj);// 将fnTest中的this指向obj</span><br><span class="line">resFn();// 输出了两次&quot;john&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="剩余参数"><a href="#剩余参数" class="headerlink" title="剩余参数"></a>剩余参数</h3><p>剩余参数语法允许我们将一个不定数量的参数表示为一个数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function sum (fitst, ...args) &#123;</span><br><span class="line">    console.log(first); // 10</span><br><span class="line">    console.log(args); //[20,30]</span><br><span class="line">&#125;</span><br><span class="line">sum(10,20,30);</span><br><span class="line"></span><br><span class="line">const sumLite = (...args) =&gt; &#123;</span><br><span class="line">    let total = 0;</span><br><span class="line">    args.forEach(item =&gt; total +=item)</span><br><span class="line">    return total;</span><br><span class="line">&#125;;</span><br><span class="line">console.log(sumLite(10,20));</span><br><span class="line">console.log(sumLite(10,20,30));</span><br></pre></td></tr></table></figure>
+
+<p>剩余参数和解构混合使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let students = [&#x27;wangwu&#x27;,&#x27;zhangsan&#x27;,&#x27;lisi&#x27;];</span><br><span class="line">let [s1, ...s2] = students;</span><br><span class="line">console.log(s1); // &#x27;wangwu&#x27;</span><br><span class="line">console.log(s2); // [&#x27;zhangsan&#x27;, &#x27;lisi&#x27;]</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://anyJohn.github.io">AnyJohn</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://anyjohn.github.io/2020/08/17/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">http://anyjohn.github.io/2020/08/17/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://anyJohn.github.io" target="_blank">AnyJohn</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">前端学习笔记</a><a class="post-meta__tags" href="/tags/ES6/">ES6</a><a class="post-meta__tags" href="/tags/Javascript/">Javascript</a></div><div class="post-share"><div class="social-share" data-image="/img/cover_default1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/08/13/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" title="ES6的学习（一）"><img class="cover" src="/img/cover_default6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">ES6的学习（一）</div></div><div class="info-2"><div class="info-item-1">ES6的学习（一）什么是ES6？ES的全称是ECMASccript，它是由ECMA国际标准化组织，指定的一项脚本语言的标准化规范。ES6即ES2015之后的版本的泛指。 为什么使用ES6？JavaScript语言存在一些缺点，需要不断的推进更新来完善。  变量提升特性增加了程序运行时的不可测性 语法松散，实现相同的功能，不同的人可能会写出不同的代码。  ES6新增语法letES6中新增的用于声明变量的关键字  let声明的变量只在所处于的块级作用域有效  123456789if (true) &#123;    let a = 10;    var b = 20;    console.log(a);    console.log(b);&#125;console.log(a);// a is not definedconsole.log(b);//b = 20//...</div></div></div></a><a class="pagination-related" href="/2020/08/17/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" title="ES6的学习（三）"><img class="cover" src="/img/cover_default8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">ES6的学习（三）</div></div><div class="info-2"><div class="info-item-1">ES6的学习（三）扩展运算符Array的扩展方法扩展运算符（展开语法）扩展运算符可以将数组或者对象转为逗号分割的参数序列。 123456let ary = [1,2,3];console.log(...ary); // 1 2 3// 逗号被当做方法的参数分隔符console.log(1,2,3)let letters = [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;];console.log(...letters);// a b c 扩展运算符的应用扩展运算符可用于合并数组 123456789// 方法一let ary1 = [1,2,3];let ary2 = [3,4,5];let ary3 = [...ary1,...ary2];console.log(ary3); // [1,2,3,4,5,6]//方法二...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/08/13/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" title="ES6的学习（一）"><img class="cover" src="/img/cover_default6.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-13</div><div class="info-item-2">ES6的学习（一）</div></div><div class="info-2"><div class="info-item-1">ES6的学习（一）什么是ES6？ES的全称是ECMASccript，它是由ECMA国际标准化组织，指定的一项脚本语言的标准化规范。ES6即ES2015之后的版本的泛指。 为什么使用ES6？JavaScript语言存在一些缺点，需要不断的推进更新来完善。  变量提升特性增加了程序运行时的不可测性 语法松散，实现相同的功能，不同的人可能会写出不同的代码。  ES6新增语法letES6中新增的用于声明变量的关键字  let声明的变量只在所处于的块级作用域有效  123456789if (true) &#123;    let a = 10;    var b = 20;    console.log(a);    console.log(b);&#125;console.log(a);// a is not definedconsole.log(b);//b = 20//...</div></div></div></a><a class="pagination-related" href="/2020/08/17/ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" title="ES6的学习（三）"><img class="cover" src="/img/cover_default8.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-17</div><div class="info-item-2">ES6的学习（三）</div></div><div class="info-2"><div class="info-item-1">ES6的学习（三）扩展运算符Array的扩展方法扩展运算符（展开语法）扩展运算符可以将数组或者对象转为逗号分割的参数序列。 123456let ary = [1,2,3];console.log(...ary); // 1 2 3// 逗号被当做方法的参数分隔符console.log(1,2,3)let letters = [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;];console.log(...letters);// a b c 扩展运算符的应用扩展运算符可用于合并数组 123456789// 方法一let ary1 = [1,2,3];let ary2 = [3,4,5];let ary3 = [...ary1,...ary2];console.log(ary3); // [1,2,3,4,5,6]//方法二...</div></div></div></a><a class="pagination-related" href="/2019/11/12/Cookie%E5%92%8CSession/" title="Cookie和Session"><img class="cover" src="/img/cover_default3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-11-12</div><div class="info-item-2">Cookie和Session</div></div><div class="info-2"><div class="info-item-1">浏览器Cookie Cookie是浏览器保存在本地的文本内容   Cookie常用于保存登录状态,用户资料等小文本   Cookie具有时效性,Cookie内容会伴随请求发送给Tomcat     (以下代码写在Servlet子类的doGet(),doPost()方法内)  创建cookie   123Cookie cookie = new Cookie(&quot;user&quot;,&quot;admin&quot;);cookie.setMaxAge(60*60*24*7);//设置cookie保存7天,默认是关闭浏览器后即删除response.addCookie(cookie); 获得cookie   12345678910111213141516//request.getCookies()用户获取所有的CookieCookie[] cs = request.getCookies();String user = null;//存放用户名if (cs==null)&#123;    response.getWriter().println(&quot;User not...</div></div></div></a><a class="pagination-related" href="/2020/09/22/Flex%E5%B8%83%E5%B1%80/" title="Flex布局"><img class="cover" src="/img/cover_default3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-22</div><div class="info-item-2">Flex布局</div></div><div class="info-2"><div class="info-item-1">引言Flex布局区别于传统布局，可以更好、更简便响应式地实现各种布局。通过简单的属性设置，即可达成曾经十分复杂的，如盒子垂直居中等情况。 目前已得到所有浏览器的支持。具体支持如下图。其中红色表示不支持、绿色条纹表示部分支持、黄色角标表示需要使用-webkit-语法。 布局的传统解决方案，基于盒状模型，依赖display属性+position属性+float属性。这种布局方案对于特殊的布局（尽管现在非常常用，但不得不承认对于最初的设计而言，横向排列与垂直居中是很特殊的），比如，垂直居中就不容易实现。于是，2009年，W3C提出了一种新的布局方案——flex布局，未来即现在的布局首选方案。   Flex布局是什么？Flex是Flexible Box的缩写，意为“弹性布局”，用来为盒子模型提供最大的灵活性。任何一个容器都可以被指定为Flex布局。   123.container &#123;    display: flex;&#125;  行内元素也可以使用Flex布局。   123.container &#123;    display:...</div></div></div></a><a class="pagination-related" href="/2019/10/20/avascript%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="Javascript异步与多线程"><img class="cover" src="/img/cover_default16.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-10-20</div><div class="info-item-2">Javascript异步与多线程</div></div><div class="info-2"><div class="info-item-1">为什么要使用JavaScript多线程编程？浏览器端JavaScript是以单线程的方式执行的，也就是JavaScript和UI渲染占用同一主线程。一般来说：  非阻塞性的任务采取同步的方法，直接在主线程的执行栈完成。 阻塞性的任务采取异步操作，异步的工作一般会交给其他线程完成。  如果JavaScript进行高负载处理，UI渲染就很可能被阻断，浏览器就会出现卡顿，降低了用户的体验。而且多核CPU普及，单线程无法充分发挥CPU的计算能力。 为什么JavaScript是单线程的？JavaScript的单线程与其用途有关。JavaScript作为浏览器脚本语言，其主要用途是与用户交互，以及操作DOM。这决定了他只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同时有两个线程，一个线程往DOM节点上添加内容，一个线程删除了这个节点，这时浏览器应该以那个线程为准？当一个函数执行的时候，JS引擎会锁住DOM树，其他事件的响应代码只能在队列中等待，并且此时页面卡死（即无法响应）。 ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">AnyJohn</div><div class="author-info-description">欢迎来我的小站~</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/anyJohn"><i class="fab fa-github"></i><span>Github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">域名和服务器到期了，评论也挂了，干脆搬到github，省心些。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">ES6的学习（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="toc-number">1.1.</span> <span class="toc-text">解构赋值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E8%A7%A3%E6%9E%84"><span class="toc-number">1.1.1.</span> <span class="toc-text">数组解构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84"><span class="toc-number">1.1.2.</span> <span class="toc-text">对象解构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">箭头函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95"><span class="toc-number">1.2.1.</span> <span class="toc-text">箭头函数的几种写法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this"><span class="toc-number">1.2.2.</span> <span class="toc-text">箭头函数中的this</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%A9%E4%BD%99%E5%8F%82%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">剩余参数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/04/18/Steamdeck%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Steamdeck%E5%BC%80%E5%8F%91-1/" title="Steamdeck：如何使用Steamdeck开发"><img src="/img/cover_default4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Steamdeck：如何使用Steamdeck开发"/></a><div class="content"><a class="title" href="/2025/04/18/Steamdeck%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Steamdeck%E5%BC%80%E5%8F%91-1/" title="Steamdeck：如何使用Steamdeck开发">Steamdeck：如何使用Steamdeck开发</a><time datetime="2025-04-18T01:18:00.000Z" title="发表于 2025-04-18 09:18:00">2025-04-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/20/%E5%BC%80%E5%A7%8B%E5%88%B7%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/" title="开始刷算法的一些感想"><img src="/img/cover_default14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开始刷算法的一些感想"/></a><div class="content"><a class="title" href="/2022/02/20/%E5%BC%80%E5%A7%8B%E5%88%B7%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/" title="开始刷算法的一些感想">开始刷算法的一些感想</a><time datetime="2022-02-20T15:35:40.000Z" title="发表于 2022-02-20 23:35:40">2022-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/23/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" title="原型与原型链"><img src="/img/cover_default6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="原型与原型链"/></a><div class="content"><a class="title" href="/2022/01/23/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" title="原型与原型链">原型与原型链</a><time datetime="2022-01-23T08:16:00.000Z" title="发表于 2022-01-23 16:16:00">2022-01-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/31/%E5%A4%96%E9%83%A8JS%E6%96%87%E4%BB%B6%E8%B0%83%E7%94%A8Vue%E5%AE%9E%E4%BE%8B/" title="外部JS文件调用Vue实例"><img src="/img/cover_default15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="外部JS文件调用Vue实例"/></a><div class="content"><a class="title" href="/2021/12/31/%E5%A4%96%E9%83%A8JS%E6%96%87%E4%BB%B6%E8%B0%83%E7%94%A8Vue%E5%AE%9E%E4%BE%8B/" title="外部JS文件调用Vue实例">外部JS文件调用Vue实例</a><time datetime="2021-12-31T06:19:00.000Z" title="发表于 2021-12-31 14:19:00">2021-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/29/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/" title="浏览器输入url后发生了什么"><img src="/img/cover_default16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浏览器输入url后发生了什么"/></a><div class="content"><a class="title" href="/2021/12/29/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/" title="浏览器输入url后发生了什么">浏览器输入url后发生了什么</a><time datetime="2021-12-29T06:42:00.000Z" title="发表于 2021-12-29 14:42:00">2021-12-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By AnyJohn</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'AHYT6tDFH4Xu7iPwyNYKOgbf-MdYXbMMI',
+      appKey: 'KimtCm7Bfifc6WnmwvrHfDdb',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div></div></body></html>

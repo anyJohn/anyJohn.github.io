@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>三次握手 | AnyJohn</title><meta name="author" content="AnyJohn"><meta name="copyright" content="AnyJohn"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="三次握手三次握手（Three-way..."><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "三次握手",
+  "url": "http://anyjohn.github.io/2019/10/17/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/",
+  "image": "http://anyjohn.github.io/img/cover_default11.jpg",
+  "datePublished": "2019-10-17T07:53:00.000Z",
+  "dateModified": "2025-04-16T04:21:14.122Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "AnyJohn",
+      "url": "http://anyjohn.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/j.ico"><link rel="canonical" href="http://anyjohn.github.io/2019/10/17/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c743ebd81b6c6d31d307f41560bb78e8";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '三次握手',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/cover_default11.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">AnyJohn</span></a><a class="nav-page-title" href="/"><span class="site-name">三次握手</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">三次握手</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-10-17T07:53:00.000Z" title="发表于 2019-10-17 15:53:00">2019-10-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-16T04:21:14.122Z" title="更新于 2025-04-16 12:21:14">2025-04-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/server/">server</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2019/10/17/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2019/10/17/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p>三次握手（Three-way Handshake）其实就是指建立一个TCP连接时，需要客户端和服务器总共发送3个包。进行三次握手的主要作用就是为了确认双方的接收能力和发送能力是否正常、指定自己的初始化序列号为后面的可靠性传送做准备。实质上其实就是连接服务器指定端口，建立TCP连接，并同步连接双方的序列号和确认号，交换TCP窗口大小信息。</p>
+<p>刚开始客户端处于 Closed 的状态，服务端处于 Listen 状态。</p>
+<p>进行三次握手：</p>
+<h3 id="第一次握手："><a href="#第一次握手：" class="headerlink" title="第一次握手："></a>第一次握手：</h3><p><strong>客户端给服务端发一个 SYN 报文，并指明客户端的初始化序列号 ISN©。此时客户端处于 SYN_SEND 状态。</strong>  </p>
+<p><strong>ISN(Initial Sequence Number)是固定的吗？</strong> <br>当一端为建立连接而发送它的SYN时，它为连接选择一个初始序号。ISN随时间而变化，因此每个连接都将具有不同的ISN。ISN可以看作是一个32比特的计数器，每4ms加1 。这样选择序号的目的在于防止在网络中被延迟的分组在以后又被传送，而导致某个连接的一方对它做错误的解释。<br>三次握手的其中一个重要功能是客户端和服务端交换 ISN(Initial Sequence Number)，以便让对方知道接下来接收数据的时候如何按序列号组装数据。如果 ISN 是固定的，攻击者很容易猜出后续的确认号，因此 ISN 是动态生成的。</p>
+<p>首部的同步位SYN&#x3D;1，初始序号seq&#x3D;x，SYN&#x3D;1的报文段不能携带数据，但要消耗掉一个序号。</p>
+<h3 id="第二次握手："><a href="#第二次握手：" class="headerlink" title="第二次握手："></a>第二次握手：</h3><p><strong>服务器收到客户端的 SYN 报文之后，会以自己的 SYN 报文作为应答，并且也是指定了自己的初始化序列号 ISN(s)。同时会把客户端的 ISN + 1 作为ACK 的值，表示自己已经收到了客户端的 SYN，此时服务器处于 SYN_REVD 的状态。</strong></p>
+<p>在确认报文段中SYN&#x3D;1，ACK&#x3D;1，确认号ack&#x3D;x+1，初始序号seq&#x3D;y。</p>
+<h3 id="第三次握手："><a href="#第三次握手：" class="headerlink" title="第三次握手："></a>第三次握手：</h3><p><strong>客户端收到 SYN 报文之后，会发送一个 ACK 报文，当然，也是一样把服务器的 ISN + 1 作为 ACK 的值，表示已经收到了服务端的 SYN 报文，此时客户端处于 ESTABLISHED 状态。服务器收到 ACK 报文之后，也处于 ESTABLISHED 状态，此时，双方已建立起了连接。</strong></p>
+<p>确认报文段ACK&#x3D;1，确认号ack&#x3D;y+1，序号seq&#x3D;x+1（初始为seq&#x3D;x，第二个报文段所以要+1），ACK报文段可以携带数据，不携带数据则不消耗序号。</p>
+<p>发送第一个SYN的一端将执行主动打开（active open），接收这个SYN并发回下一个SYN的另一端执行被动打开（passive open）。</p>
+<p>在socket编程中，客户端执行connect()时，将触发三次握手。</p>
+<h3 id="为什么需要三次握手，两次不行吗？"><a href="#为什么需要三次握手，两次不行吗？" class="headerlink" title="为什么需要三次握手，两次不行吗？"></a>为什么需要三次握手，两次不行吗？</h3><p>弄清这个问题，我们需要先弄明白三次握手的目的是什么，能不能只用两次握手来达到同样的目的。</p>
+<p>**第一次握手：**客户端发送网络包，服务端收到了。</p>
+<p>这样服务端就能得出结论：客户端的发送能力、服务端的接收能力是正常的。</p>
+<p><strong>第二次握手：</strong> 服务端发包，客户端收到了。</p>
+<p>这样客户端就能得出结论：服务端的接收、发送能力，客户端的接收、发送能力是正常的。不过此时服务器并不能确认客户端的接收能力是否正常。</p>
+<p>**第三次握手：**客户端发包，服务端收到了。</p>
+<p>这样服务端就能得出结论：客户端的接收、发送能力正常，服务器自己的发送、接收能力也正常。</p>
+<p>因此，需要三次握手才能确认双方的接收与发送能力是否正常。</p>
+<p>试想如果是用两次握手，则会出现下面这种情况：</p>
+<p>如客户端发出连接请求，但因连接请求报文丢失而未收到确认，于是客户端再重传一次连接请求。后来收到了确认，建立了连接。数据传输完毕后，就释放了连接，客户端共发出了两个连接请求报文段，其中第一个丢失，第二个到达了服务端，但是第一个丢失的报文段只是在某些网络结点长时间滞留了，延误到连接释放以后的某个时间才到达服务端，此时服务端误认为客户端又发出一次新的连接请求，于是就向客户端发出确认报文段，同意建立连接，不采用三次握手，只要服务端发出确认，就建立新的连接了，此时客户端忽略服务端发来的确认，也不发送数据，则服务端一致等待客户端发送数据，浪费资源。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://anyJohn.github.io">AnyJohn</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://anyjohn.github.io/2019/10/17/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">http://anyjohn.github.io/2019/10/17/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://anyJohn.github.io" target="_blank">AnyJohn</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><a class="post-meta__tags" href="/tags/server/">server</a><a class="post-meta__tags" href="/tags/tcp/">tcp</a></div><div class="post-share"><div class="social-share" data-image="/img/cover_default11.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2019/10/17/%E5%88%9D%E8%A7%81Vue/" title="初见Vue"><img class="cover" src="/img/cover_default5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">初见Vue</div></div><div class="info-2"><div class="info-item-1">vue2.X 核心技术-最流行的前端框架学习清单： vue2.X框架常用知识点（模板语法、条件渲染、列表渲染等） vue2.X核心技术（vue-router、vuex） 集成vue2.x   vue优点：  方便集成，灵活小巧 语法清晰，便捷强大  Vue常用知识点  vue Hello World！: 1&lt;script src=&quot;https://cdn.bootcss.com/vue/2.6.10/vue.min.js&quot;&gt;&lt;/script&gt;//引用bootCDN的vue库 建立一个Vue对象: 123456new Vue(&#123;    el:&#x27;.bg&#x27;,    data:&#123;        msg:&#x27;hello vue!&#x27;      ...</div></div></div></a><a class="pagination-related" href="/2019/10/20/avascript%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="Javascript异步与多线程"><img class="cover" src="/img/cover_default16.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Javascript异步与多线程</div></div><div class="info-2"><div class="info-item-1">为什么要使用JavaScript多线程编程？浏览器端JavaScript是以单线程的方式执行的，也就是JavaScript和UI渲染占用同一主线程。一般来说：  非阻塞性的任务采取同步的方法，直接在主线程的执行栈完成。 阻塞性的任务采取异步操作，异步的工作一般会交给其他线程完成。  如果JavaScript进行高负载处理，UI渲染就很可能被阻断，浏览器就会出现卡顿，降低了用户的体验。而且多核CPU普及，单线程无法充分发挥CPU的计算能力。 为什么JavaScript是单线程的？JavaScript的单线程与其用途有关。JavaScript作为浏览器脚本语言，其主要用途是与用户交互，以及操作DOM。这决定了他只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同时有两个线程，一个线程往DOM节点上添加内容，一个线程删除了这个节点，这时浏览器应该以那个线程为准？当一个函数执行的时候，JS引擎会锁住DOM树，其他事件的响应代码只能在队列中等待，并且此时页面卡死（即无法响应）。 ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/09/22/Flex%E5%B8%83%E5%B1%80/" title="Flex布局"><img class="cover" src="/img/cover_default3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-22</div><div class="info-item-2">Flex布局</div></div><div class="info-2"><div class="info-item-1">引言Flex布局区别于传统布局，可以更好、更简便响应式地实现各种布局。通过简单的属性设置，即可达成曾经十分复杂的，如盒子垂直居中等情况。 目前已得到所有浏览器的支持。具体支持如下图。其中红色表示不支持、绿色条纹表示部分支持、黄色角标表示需要使用-webkit-语法。 布局的传统解决方案，基于盒状模型，依赖display属性+position属性+float属性。这种布局方案对于特殊的布局（尽管现在非常常用，但不得不承认对于最初的设计而言，横向排列与垂直居中是很特殊的），比如，垂直居中就不容易实现。于是，2009年，W3C提出了一种新的布局方案——flex布局，未来即现在的布局首选方案。   Flex布局是什么？Flex是Flexible Box的缩写，意为“弹性布局”，用来为盒子模型提供最大的灵活性。任何一个容器都可以被指定为Flex布局。   123.container &#123;    display: flex;&#125;  行内元素也可以使用Flex布局。   123.container &#123;    display:...</div></div></div></a><a class="pagination-related" href="/2020/01/15/Java%E5%8C%85%E8%A3%85%E7%B1%BB/" title="Java包装类"><img class="cover" src="/img/cover_default4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-15</div><div class="info-item-2">Java包装类</div></div><div class="info-2"><div class="info-item-1">什么是包装类?我们都对Java中的基本类型很熟悉,基本类型是不具备对象的特性的,比如基本类型不能调用方法,功能很少,为了让基本数据类型也具有对象的特性,java为每个基本类型提供了一个包装类,这样我们就可以像操作对象一样操作基本数据类型包装类都在java.lang包内基本类与包装类的对应关系:  包装类主要提供了两大类方法:  将本类型和其他基本类型进行转换的方法 将字符串和本类型及包装类互相转换的方法  Java中基本类型和包装类之间的转换基本类型和包装类之间经常需要转换在JDK1.5引入自动装箱和拆箱的机制后,包装类和基本类型之间的转换就更加轻松便利了那么什么是装箱和拆箱呢?装箱: 把基本类型转换成包装类,使其具有对象的性质,又可分为手动装箱和自动装箱 123int i = 0;//定义一个int基本类型值Integer x = new Integer(i);//手动装箱Integer y = i;//自动装箱 拆箱: 和装箱相反,把包装类对象转换成基本类型的值,又可分为手动拆箱和自动拆箱 123Integer j = new Integer(8);int m =...</div></div></div></a><a class="pagination-related" href="/2019/11/14/Java%E7%90%86%E8%A7%A3String%E7%9A%84%E4%B8%8D%E5%8F%98%E6%80%A7/" title="Java理解String的不变性"><img class="cover" src="/img/cover_default8.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-11-14</div><div class="info-item-2">Java理解String的不变性</div></div><div class="info-2"><div class="info-item-1">String对象创建后不能被修改,是不可变的,所谓的修改其实是创建了新的对象,所指向的内存空间不同1234567891011121314//比如创建四个String对象,值都为&quot;Love&quot;String s1 = &quot;Love&quot;;String s2 = &quot;Love&quot;;String s3 = new String(&quot;Love&quot;);String s4 = new String(&quot;Love&quot;);//对于字符常量,只创建一个,重复的会引用常量池中的内容,所以比对s1,s2的内存,会返回trueSystem.out.println(s1 == s2);//s1和s3是不同的对象,会返回falseSystem.out.println(s1 == s3);//s3和s4是不同的对象,两者都开辟了不同的内存空间,所以返回falseSystem.out.println(s3 == s4);//修改s1,s1会指向新的内存空间s1 = s1+&quot;...</div></div></div></a><a class="pagination-related" href="/2019/10/14/ttp%E4%B8%8EHttps/" title="Http与Https"><img class="cover" src="/img/cover_default7.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-10-14</div><div class="info-item-2">Http与Https</div></div><div class="info-2"><div class="info-item-1">Http与Https概括超文本传输协议HTTP协议被用与在Web浏览器和网站服务器之间传递信息，http是无状态的，以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此，http协议不适合传输一些敏感信息。为了解决http协议的这一缺陷，需要使用另一种协议：安全套接字层超文本传输协议https，为了数据传输的安全，https在http的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。   http和https的基本概念http：是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器端请求和应答的标准（tcp），用于从WWW服务器传输超文本到浏览器的传输协议，他可以使浏览器更加高效，使网络传输减少。https：是以安全为目的的http通道，即http（应用层）下加入SSL层，https的安全基础是SSL，因此加密的详细内容就需要SSL ...</div></div></div></a><a class="pagination-related" href="/2019/10/17/%E4%BB%80%E4%B9%88%E6%98%AF%E5%89%8D%E7%AB%AF/" title="什么是前端"><img class="cover" src="/img/cover_default15.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-10-17</div><div class="info-item-2">什么是前端</div></div><div class="info-2"><div class="info-item-1">前端五要义：系统全面的知识体系：CSS HTML JavaScript企业主流开发技术：react、Vue.js、ES6、webpack、微信小程序相对丰富完整的项目经验：电商、社交、小程序师从大厂技术大牛快速高效的学习方法：项目——文档——视频，结合学习。   什么是前端？完成你所看到的一切！  HTML制作网页的结构和内容    CSS负责网页的样式  JavaScript完成和用户之间的动态交互 所有的框架都是基于这三者。     前端开发兵器： webstrom：前端开发神器 sublime：强大的编辑功能 vscode：微软出品 HbuildX：国内  </div></div></div></a><a class="pagination-related" href="/2019/10/17/%E5%88%9D%E8%A7%81Vue/" title="初见Vue"><img class="cover" src="/img/cover_default5.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-10-17</div><div class="info-item-2">初见Vue</div></div><div class="info-2"><div class="info-item-1">vue2.X 核心技术-最流行的前端框架学习清单： vue2.X框架常用知识点（模板语法、条件渲染、列表渲染等） vue2.X核心技术（vue-router、vuex） 集成vue2.x   vue优点：  方便集成，灵活小巧 语法清晰，便捷强大  Vue常用知识点  vue Hello World！: 1&lt;script src=&quot;https://cdn.bootcss.com/vue/2.6.10/vue.min.js&quot;&gt;&lt;/script&gt;//引用bootCDN的vue库 建立一个Vue对象: 123456new Vue(&#123;    el:&#x27;.bg&#x27;,    data:&#123;        msg:&#x27;hello vue!&#x27;      ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">AnyJohn</div><div class="author-info-description">欢迎来我的小站~</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/anyJohn"><i class="fab fa-github"></i><span>Github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">域名和服务器到期了，评论也挂了，干脆搬到github，省心些。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">1.</span> <span class="toc-text">三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">第一次握手：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">第二次握手：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">第三次握手：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E4%B8%A4%E6%AC%A1%E4%B8%8D%E8%A1%8C%E5%90%97%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">为什么需要三次握手，两次不行吗？</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/04/18/Steamdeck%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Steamdeck%E5%BC%80%E5%8F%91-1/" title="Steamdeck：如何使用Steamdeck开发"><img src="/img/cover_default4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Steamdeck：如何使用Steamdeck开发"/></a><div class="content"><a class="title" href="/2025/04/18/Steamdeck%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Steamdeck%E5%BC%80%E5%8F%91-1/" title="Steamdeck：如何使用Steamdeck开发">Steamdeck：如何使用Steamdeck开发</a><time datetime="2025-04-18T01:18:00.000Z" title="发表于 2025-04-18 09:18:00">2025-04-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/20/%E5%BC%80%E5%A7%8B%E5%88%B7%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/" title="开始刷算法的一些感想"><img src="/img/cover_default14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开始刷算法的一些感想"/></a><div class="content"><a class="title" href="/2022/02/20/%E5%BC%80%E5%A7%8B%E5%88%B7%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/" title="开始刷算法的一些感想">开始刷算法的一些感想</a><time datetime="2022-02-20T15:35:40.000Z" title="发表于 2022-02-20 23:35:40">2022-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/23/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" title="原型与原型链"><img src="/img/cover_default6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="原型与原型链"/></a><div class="content"><a class="title" href="/2022/01/23/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" title="原型与原型链">原型与原型链</a><time datetime="2022-01-23T08:16:00.000Z" title="发表于 2022-01-23 16:16:00">2022-01-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/31/%E5%A4%96%E9%83%A8JS%E6%96%87%E4%BB%B6%E8%B0%83%E7%94%A8Vue%E5%AE%9E%E4%BE%8B/" title="外部JS文件调用Vue实例"><img src="/img/cover_default15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="外部JS文件调用Vue实例"/></a><div class="content"><a class="title" href="/2021/12/31/%E5%A4%96%E9%83%A8JS%E6%96%87%E4%BB%B6%E8%B0%83%E7%94%A8Vue%E5%AE%9E%E4%BE%8B/" title="外部JS文件调用Vue实例">外部JS文件调用Vue实例</a><time datetime="2021-12-31T06:19:00.000Z" title="发表于 2021-12-31 14:19:00">2021-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/29/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/" title="浏览器输入url后发生了什么"><img src="/img/cover_default16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浏览器输入url后发生了什么"/></a><div class="content"><a class="title" href="/2021/12/29/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/" title="浏览器输入url后发生了什么">浏览器输入url后发生了什么</a><time datetime="2021-12-29T06:42:00.000Z" title="发表于 2021-12-29 14:42:00">2021-12-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By AnyJohn</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'AHYT6tDFH4Xu7iPwyNYKOgbf-MdYXbMMI',
+      appKey: 'KimtCm7Bfifc6WnmwvrHfDdb',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div></div></body></html>
